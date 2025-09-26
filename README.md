@@ -128,6 +128,3 @@ Frontend → [http://localhost:3000](http://localhost:3000)
 Licensed under the **MIT License** – see [LICENSE](LICENSE) for details.
 
 ```
-
-Do you want me to also add a **quick start with Docker Compose** section, in case you or others want one-command setup later?
-```
