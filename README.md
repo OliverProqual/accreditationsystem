@@ -1,4 +1,3 @@
-```markdown
 # Accreditation System
 
 A **full-stack web application** for managing accreditation workflows.  
