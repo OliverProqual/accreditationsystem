@@ -15,7 +15,7 @@ export default function Login({ onLogin }) {
 
     try {
       const response = await api.post(
-        "/auth/token",
+        "/auth/login",
         qs.stringify({
           username: email,
           password: password,

@@ -15,7 +15,11 @@ oauth2_scheme = OAuth2PasswordBearer(tokenUrl="/auth/token")
 
 router = APIRouter(prefix="/auth", tags=["auth"])
 
-# Pydantic models
+
+class LoginRequest(BaseModel):
+    username: str
+    password: str
+# Pydantic moels
 class Token(BaseModel):
     access_token: str
     token_type: str
@@ -38,8 +42,8 @@ def create_access_token(data: dict, expires_delta: timedelta | None = None):
     to_encode.update({"exp": expire})
     return jwt.encode(to_encode, SECRET_KEY, algorithm=ALGORITHM)
 
-# ---- Login ----
-@router.post("/token", response_model=Token)
+## ---- Login ----
+@router.post("/login", response_model=Token)
 def login(form_data: OAuth2PasswordRequestForm = Depends()):
     with db.cursor() as cursor:
         cursor.execute("SELECT * FROM users WHERE Email=%s", (form_data.username,))
@@ -54,6 +58,7 @@ def login(form_data: OAuth2PasswordRequestForm = Depends()):
         token_data = {"UserID": user_id, "Role": role, "CentreID": centre_id}
         access_token = create_access_token(token_data, timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES))
         return {"access_token": access_token, "token_type": "bearer"}
+
 
 # ---- Dependency: get current user ----
 def get_current_user(token: str = Depends(oauth2_scheme)) -> TokenData:
