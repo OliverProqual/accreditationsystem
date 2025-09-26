@@ -1,5 +1,3 @@
-Got it 👍 — here’s the simplified `README.md` in raw Markdown format that you can paste directly into your repo:
-
 ```markdown
 # Accreditation System
 
